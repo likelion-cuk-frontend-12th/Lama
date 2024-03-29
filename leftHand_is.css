@@ -1,0 +1,36 @@
+html {
+background-color: tomato
+
+}
+
+body {
+background-color: wheat;
+border: 3px solid black;
+width: 700px;
+height: 700px;
+margin: 0 auto;
+margin-top: 20%;
+align-items: center;
+justify-content: center;
+display: flex;
+}
+
+.square {
+border: 3px solid white;
+background-color: darkcyan;
+color: green;
+width: 100px;
+height: 100px;
+margin: auto;
+margin-top: 3%
+}
+
+#square-mid {
+border: 3px dashed white;
+background-color: darkcyan;
+color: green;
+width: 500px;
+height: 100px;
+margin: auto;
+margin-top: 2%
+}
