@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <link rel="stylesheet" href="cal.css" >
+    <script src="cal.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p1>Calculator</p1>
+        <div>
+            <p3>First number:</p3>
+            <input type="text" value="" class="number1">
+            <p3>Second number:</p3>
+            <input type="text" value=""class="number2">
+            <select name="options">
+                <option value="+" class="operator">+</option>
+                <option value="-" class="operator">-</option>
+                <option value="*" selected class="operator">*</option>
+                <option value="/" class="operator">/</option>
+            </select>
+
+            <button onclick="calculate()">Calculate</button>
+            <p id="result"></p>
+
+        </div>    
+    </div>
+</body>
+</html>
