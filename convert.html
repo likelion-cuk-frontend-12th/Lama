@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    .button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .reset {
+      background-color: #f44336;
+      color: white;
+    }
+    .invert {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+  <script type="text/babel">
+    function ConverterButton({ onClick, label, className }) {
+      return (
+        <button className={`button ${className}`} onClick={onClick}>
+          {label}
+        </button>
+      );
+    }
+
+    function MinutesHoursConverter() {
+      const [minutes, setMinutes] = React.useState(0);
+      const [hours, setHours] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false);
+
+      const handleMinutesChange = (e) => {
+        const mins = parseFloat(e.target.value);
+        setMinutes(mins);
+        setHours(Math.round(mins / 60));
+      };
+
+      const handleHoursChange = (e) => {
+        const hrs = parseFloat(e.target.value);
+        setHours(hrs);
+        setMinutes(Math.round(hrs * 60));
+      };
+
+      const reset = () => {
+        setMinutes(0);
+        setHours(0);
+      };
+
+      const invert = () => {
+        setInverted(!inverted);
+        reset();
+      };
+
+      return (
+        <div>
+          <h3>분/시 변환기</h3>
+          <div>
+            <label>분: </label>
+            <input
+              placeholder="Minutes"
+              type="number"
+              value={inverted ? Math.round(minutes) : minutes}
+              onChange={handleMinutesChange}
+              disabled={inverted}
+            />
+          </div>
+          <div>
+            <label>시: </label>
+            <input
+              placeholder="Hours"
+              type="number"
+              value={inverted ? hours : Math.round(hours)}
+              onChange={handleHoursChange}
+              disabled={!inverted}
+            />
+          </div>
+          <br />
+          <div>
+            <ConverterButton onClick={reset} label="리셋" className="reset" />
+            <ConverterButton onClick={invert} label="전환" className="invert" />
+          </div>
+        </div>
+      );
+    }
+
+    function KmMilesConverter() {
+      const [km, setKm] = React.useState(0);
+      const [miles, setMiles] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false);
+
+      const handleKmChange = (e) => {
+        const kilometers = parseFloat(e.target.value);
+        setKm(kilometers);
+        setMiles(Math.round(kilometers * 0.621371));
+      };
+
+      const handleMilesChange = (e) => {
+        const miles = parseFloat(e.target.value);
+        setMiles(miles);
+        setKm(Math.round(miles / 0.621371));
+      };
+
+      const reset = () => {
+        setKm(0);
+        setMiles(0);
+      };
+
+      const invert = () => {
+        setInverted(!inverted);
+        reset();
+      };
+
+      return (
+        <div>
+          <h3>킬로미터/마일 변환기</h3>
+          <div>
+            <label>킬로미터: </label>
+            <input
+              placeholder="Kilometers"
+              type="number"
+              value={inverted ? Math.round(km) : km}
+              onChange={handleKmChange}
+              disabled={inverted}
+            />
+          </div>
+          <div>
+            <label>마일: </label>
+            <input
+              placeholder="Miles"
+              type="number"
+              value={inverted ? miles : Math.round(miles)}
+              onChange={handleMilesChange}
+              disabled={!inverted}
+            />
+          </div>
+          <br />
+          <div>
+            <ConverterButton onClick={reset} label="리셋" className="reset" />
+            <ConverterButton onClick={invert} label="전환" className="invert" />
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [converter, setConverter] = React.useState('minutes-hours');
+
+      return (
+        <div>
+          <h1>테스트</h1>
+          <div>
+            <button onClick={() => setConverter('minutes-hours')}>분/시 변환기</button>
+            <button onClick={() => setConverter('km-miles')}>킬로미터/마일 변환기</button>
+          </div>
+          <br />
+          {converter === 'minutes-hours' ? <MinutesHoursConverter /> : <KmMilesConverter />}
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</html>
